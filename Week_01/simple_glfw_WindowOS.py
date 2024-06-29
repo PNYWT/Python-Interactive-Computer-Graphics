@@ -1,16 +1,27 @@
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from glfw.GLFW import *
-  
+
 def refresh(window):
     glClearColor(0, 1, 1, 0)
     glClear(GL_COLOR_BUFFER_BIT)
+
+    # First triangle (red)
     glBegin(GL_TRIANGLES)
     glColor3f(1, 0, 0)
-    glVertex3f(-0.5, -0.5, 0)
-    glVertex3f( 0.5, -0.5, 0)
-    glVertex3f( 0, 0.5, 0)
+    glVertex3f(-1.0, 1.0, 0) # บนซ้าย
+    glVertex3f( 1.0, 1.0, 0) # บนขวา
+    glVertex3f(-1.0, -1.0, 0) # ล่างขวา
     glEnd()
+
+    # Second triangle (yellow)
+    glBegin(GL_TRIANGLES)
+    glColor3f(1, 1, 0)
+    glVertex3f(1.0, 1.0, 0) # บนขวา
+    glVertex3f(1.0, -1.0, 0) # ล่างซ้าย
+    glVertex3f(-1.0, -1.0, 0) # ล่างขวา
+    glEnd()
+
     glFlush()
 
 def keyboard(window, key, scancode, action, mods):
@@ -18,9 +29,9 @@ def keyboard(window, key, scancode, action, mods):
         glfwSetWindowShouldClose(window, GLFW_TRUE)
 
 def show_versions():
-    lists = [['Vendor', GL_VENDOR], ['Renderer',GL_RENDERER],
-            ['OpenGL Version', GL_VERSION],
-            ['GLSL Version', GL_SHADING_LANGUAGE_VERSION]]
+    lists = [['Vendor', GL_VENDOR], ['Renderer', GL_RENDERER],
+             ['OpenGL Version', GL_VERSION],
+             ['GLSL Version', GL_SHADING_LANGUAGE_VERSION]]
     for x in lists:
         print("%s: %s" % (x[0], glGetString(x[1]).decode("utf-8")))
 
